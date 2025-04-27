@@ -1,4 +1,4 @@
-import { NodeLibs } from "@lib/nodeLib";
+import { NodeLibs } from "./types";
 
 export const readJsonFile = async (
   libs: NodeLibs,
