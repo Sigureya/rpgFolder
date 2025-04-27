@@ -1,4 +1,5 @@
-import type { NodeLibs } from "./lib";
+import type { NodeLibs } from "@lib/nodeLib";
+
 export class FolderClass {
   constructor(private libs: NodeLibs) {}
   async createFolder(path: string): Promise<void> {
