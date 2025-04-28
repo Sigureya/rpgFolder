@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -8,6 +9,12 @@ export default defineConfig({
     coverage: {
       //      provider: "c8", // カバレッジ計測を有効化
       reporter: ["text", "html"], // レポート形式
+    },
+  },
+  resolve: {
+    alias: {
+      "@lib/nodeLib": path.resolve(__dirname, "src/libs/nodeLib"),
+      "@constants": path.resolve(__dirname, "src/libs/constants"),
     },
   },
 });
