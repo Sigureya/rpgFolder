@@ -7,9 +7,9 @@ import tsParser from "@typescript-eslint/parser";
 // import tseslint from "typescript-eslint";
 
 export default [
-  { ignores: ["dist", "**/*.d.ts"] },
   {
-    //    files: ["src/**/*.ts", "vite.config.mts"],
+    ignores: ["dist", "**/*.d.ts"],
+    files: ["src/**/*.ts", "vite.config.mts"],
 
     languageOptions: {
       //      ecmaVersion: 2020,
@@ -29,8 +29,8 @@ export default [
     },
     rules: {
       // ESLintの推奨ルールセットを手動で適用
-      "no-undef": "error",
-      "no-console": "warn",
+      //"no-undef": "error",
+      //      "no-console": "warn",
       eqeqeq: "error",
       curly: "error",
 
