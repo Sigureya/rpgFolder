@@ -1,6 +1,6 @@
 import { defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
-
+import path from "path";
 import { middleware } from "./src/examples/server/devServer";
 
 const viewBuild = (): UserConfig => ({
@@ -29,6 +29,12 @@ const libBuild = (): UserConfig => ({
     sourcemap: true,
     rollupOptions: {
       external: (id) => id.endsWith(".test.ts"),
+    },
+  },
+  resolve: {
+    alias: {
+      "@lib/nodeLib": path.resolve(__dirname, "src/libs/nodeLib"),
+      "@constants": path.resolve(__dirname, "src/libs/constants"),
     },
   },
 });

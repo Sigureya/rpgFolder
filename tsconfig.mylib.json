@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@lib/nodeLib": ["./src/libs/nodeLib"]
+      "@lib/nodeLib": ["./src/libs/nodeLib"],
+      "@constants": ["./src/libs/constants"]
     }
   }
 }
