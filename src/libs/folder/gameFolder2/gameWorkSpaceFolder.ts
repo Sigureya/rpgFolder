@@ -28,7 +28,7 @@ import {
   FILENAME_STATES,
 } from "@sigureya/rpgtypes";
 import { makeFolder } from "@lib/nodeLib";
-import { readData, writeData } from "./utils";
+import { readData, writeData } from "./main/utils";
 import type { Dirent } from "node:fs";
 
 export class WorkSpace_MainFolder implements WorkSpace_MainFolder {

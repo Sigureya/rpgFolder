@@ -1,15 +1,15 @@
-import type { NodeLibs } from "./types/";
+import type PathLib from "node:path";
 
 export const isSafeFileName = (fileName: string): boolean => {
   return /^[\w.-_]+$/.test(fileName); // 英数字・ドット・ハイフン・アンダースコアのみ許可
 };
 
 export const getRelativePath = (
-  libs: NodeLibs,
+  libs: Pick<typeof PathLib, "relative">,
   base: string,
   target: string
 ): string => {
-  return libs.path.relative(base, target);
+  return libs.relative(base, target);
 };
 
 export const isJsonFile = (filePath: string): boolean => {
