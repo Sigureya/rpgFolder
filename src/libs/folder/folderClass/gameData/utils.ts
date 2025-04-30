@@ -1,6 +1,7 @@
-import { FOLDER_DATA, IdentifiedItems } from "@sigureya/rpgtypes";
-import PathLib from "node:path";
-import FsLib from "node:fs/promises";
+import type { IdentifiedItems } from "@sigureya/rpgtypes";
+import { FOLDER_DATA } from "@sigureya/rpgtypes";
+import type PathLib from "node:path";
+import type FsLib from "node:fs/promises";
 
 export const normalizeIdentifiedItems = <T>(items: IdentifiedItems<T>): T[] => {
   return items.filter((item): item is T => item !== null);
