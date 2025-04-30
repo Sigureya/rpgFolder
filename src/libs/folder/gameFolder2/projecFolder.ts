@@ -1,7 +1,7 @@
 import type PathLib from "node:path";
 import type FsLib from "node:fs/promises";
 
-import { WorkSpace_MainFolder } from "./mainWorkspace/gameWorkSpaceFolder";
+import { WorkSpace_MainFolder } from "./mainWorkspace";
 
 export class ProjectFolder {
   public readonly _main: WorkSpace_MainFolder;
