@@ -20,7 +20,7 @@ describe("readMapFileFromInfo", async () => {
 
   const pathLib = {
     resolve: (basePath: string, filename: string) => `${basePath}/${filename}`,
-  } as unknown as Pick<typeof PathLib, "resolve">;
+  } as Pick<typeof PathLib, "resolve">;
 
   const basePath = "/maps";
 
