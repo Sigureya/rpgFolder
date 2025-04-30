@@ -1,6 +1,6 @@
 import { describe, test, expect, vi } from "vitest";
 import { readData, writeData } from "./utils";
-import FsLib from "node:fs/promises";
+import type FsLib from "node:fs/promises";
 import { FOLDER_DATA } from "@sigureya/rpgtypes";
 
 describe("readData", async () => {
