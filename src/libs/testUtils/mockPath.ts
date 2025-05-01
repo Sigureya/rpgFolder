@@ -1,5 +1,7 @@
 import type PathLib from "node:path";
-import { vi } from "vitest";
+import FsLib from "node:fs/promises";
+import { expect, vi } from "vitest";
+import type { Dirent } from "node:fs";
 
 export const makeMockPath = (
   result: {
@@ -13,4 +15,17 @@ export const makeMockPath = (
   basename: vi.fn(() => result.basename ?? ""),
   dirname: vi.fn(() => result.dirname ?? ""),
   extname: vi.fn(() => result.extname ?? ""),
+});
+
+interface FSX {
+  readFile: string;
+  readdir: Dirent[];
+}
+
+export const makeMockFs = (result: FSX) => ({
+  readFile: vi.fn((path: string, opt: { withFileTypes: boolean }) => {
+    expect(opt.withFileTypes).toBe(true);
+    return Promise.resolve(result.readFile);
+  }),
+  readdir: vi.fn(() => Promise.resolve(result.readdir)),
 });
