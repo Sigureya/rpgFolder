@@ -1,13 +1,16 @@
 import type PathLib from "node:path";
-import type { MockedFunction } from "vitest";
 import { vi } from "vitest";
 
 export const makeMockPath = (
-  mockedPath: string
-): {
-  resolve: MockedFunction<typeof PathLib.resolve>;
-  sep: string;
-} => ({
-  resolve: vi.fn(() => mockedPath),
+  result: {
+    [K in keyof typeof PathLib]?: string;
+  } = {}
+) => ({
+  resolve: vi.fn(() => result.resolve ?? ""),
+  join: vi.fn(() => result.join ?? ""),
   sep: "/",
+  relative: vi.fn(() => result.relative ?? ""),
+  basename: vi.fn(() => result.basename ?? ""),
+  dirname: vi.fn(() => result.dirname ?? ""),
+  extname: vi.fn(() => result.extname ?? ""),
 });
