@@ -24,17 +24,25 @@ import {
   FILANAME_CLASSES,
   FILENAME_COMMON_EVENTS,
   FILENAME_STATES,
+  FOLDER_DATA,
 } from "@sigureya/rpgtypes";
 import { readData, writeData } from "./utils";
 import type { GameDataFolder } from "./dispatch";
+import { ensureFolderPath } from "@lib/nodeLib";
 
 export class GameDataFolderClass implements GameDataFolder {
+  public readonly basePath: string;
   constructor(
-    private pathLib: typeof PathLib,
-    private fsLib: typeof FsLib,
-    public readonly name: string,
-    public readonly basePath: string
-  ) {}
+    private pathLib: Pick<typeof PathLib, "join" | "sep" | "resolve">,
+    private fsLib: Pick<typeof FsLib, "readFile" | "writeFile">,
+    basePath: string
+  ) {
+    this.basePath = ensureFolderPath(pathLib, basePath, FOLDER_DATA);
+  }
+
+  nameIsValid(): boolean {
+    return this.basePath.endsWith(`${this.pathLib.sep}${FOLDER_DATA}`);
+  }
 
   private async readData<T>(fileName: string): Promise<T[]> {
     return readData(this.pathLib, this.fsLib, this.basePath, fileName);
