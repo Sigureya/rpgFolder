@@ -15,3 +15,13 @@ export const getRelativePath = (
 export const isJsonFile = (filePath: string): boolean => {
   return filePath.toLowerCase().endsWith(".json");
 };
+
+export const ensureFolderPath = (
+  pathLib: Pick<typeof PathLib, "join" | "sep">,
+  basePath: string,
+  folderName: string
+): string => {
+  return basePath.endsWith(`${pathLib.sep}${folderName}`)
+    ? basePath
+    : pathLib.join(basePath, folderName);
+};

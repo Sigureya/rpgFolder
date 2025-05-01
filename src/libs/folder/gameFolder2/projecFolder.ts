@@ -10,7 +10,7 @@ export class ProjectFolder {
 
   constructor(
     private pathLib: typeof PathLib,
-    private fsLib: typeof FsLib,
+    fsLib: typeof FsLib,
     public d: { basePath: string; gameTitle: string }
   ) {
     this.basePath = d.basePath;
