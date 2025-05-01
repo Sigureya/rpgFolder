@@ -3,6 +3,7 @@ import { makeMapData } from "@sigureya/rpgtypes";
 import type FsLib from "node:fs/promises";
 import type PathLib from "node:path";
 import type { ResultOfReadMapFile } from "./types";
+import type { Dirent } from "node:fs";
 
 type InfoType = Pick<Data_MapInfo, "name" | "id">;
 
@@ -79,4 +80,17 @@ export const mappingAllMapFiles = <T>(
       );
       return fn(mapFileInfo);
     });
+};
+
+export const isMapFileName = (filename: string) => {
+  return filename.startsWith("Map") && filename.endsWith(".json");
+};
+
+export const listupMapFiles = async (
+  fsLib: typeof FsLib,
+  basePath: string
+): Promise<Dirent[]> => {
+  return (await fsLib.readdir(basePath, { withFileTypes: true })).filter(
+    (dirent) => dirent.isFile() && isMapFileName(dirent.name)
+  );
 };
