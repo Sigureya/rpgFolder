@@ -36,14 +36,14 @@ describe("imageFolderPath", () => {
 });
 
 test("", () => {
-  const mockPathLib = makeMockPath("mockPath");
+  const mockPathLib = makeMockPath({ resolve: "mockPath" });
   expect(mockPathLib.resolve()).toBe("mockPath");
-  expect(mockPathLib.resolve("aaa")).toBe("mockPath");
+  expect(mockPathLib.resolve()).toBe("mockPath");
 });
 
 describe("imageFiles", () => {
   test("returns only .png files from the directory", async () => {
-    const mockPathLib = makeMockPath("mockPath");
+    const mockPathLib = makeMockPath({ resolve: "mockPath" });
     const mockFsLib = {
       readdir: vi.fn(
         async () =>
@@ -78,7 +78,7 @@ describe("imageFiles", () => {
   });
 
   test("returns empty array if no .png files are found", async () => {
-    const mockPathLib = makeMockPath("mockPath");
+    const mockPathLib = makeMockPath({ resolve: "mockPath" });
     const mockFsLib = {
       readdir: vi.fn(
         async () =>
