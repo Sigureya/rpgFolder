@@ -1,7 +1,7 @@
 import type PathLib from "node:path";
 import FsLib from "node:fs/promises";
 import { expect, vi } from "vitest";
-import type { Dirent } from "node:fs";
+import { writeFile, type Dirent } from "node:fs";
 
 export const makeMockPath = (
   result: {
@@ -28,4 +28,5 @@ export const makeMockFs = (result: FSX) => ({
     return Promise.resolve(result.readFile);
   }),
   readdir: vi.fn(() => Promise.resolve(result.readdir)),
+  writeFile: vi.fn((path: string, data: string) => Promise.resolve()),
 });
