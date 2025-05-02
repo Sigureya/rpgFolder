@@ -28,7 +28,9 @@ export const ensurePath = (
 };
 
 export const validateFilePath = (filePath: string): boolean => {
-  return !filePath.includes("..");
+  // 相対パスの../と、拡張子の両方を禁止する
+  // ./xxは存在しないので巻き添えで禁止
+  return !filePath.includes(".");
 };
 
 const buildAssetPath = (
