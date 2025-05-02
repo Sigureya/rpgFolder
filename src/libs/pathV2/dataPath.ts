@@ -17,7 +17,7 @@ import type PathLib from "node:path";
 
 type PathJoin = Pick<typeof PathLib, "resolve" | "sep">;
 
-const ensureFolderPath = (
+const ensureDataPath = (
   pathLib: PathJoin,
   basePath: string,
   fileName: string
@@ -37,89 +37,89 @@ export const ensureMapDataPath = (
   mapId: number
 ) => {
   const fileName = makeMapFileName(mapId);
-  return ensureFolderPath(pathLib, basePath, fileName);
+  return ensureDataPath(pathLib, basePath, fileName);
 };
 
 export const ensureActorDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_ACTORS);
+  return ensureDataPath(pathLib, basePath, FILENAME_ACTORS);
 };
 
 export const ensureItemDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_ITEMS);
+  return ensureDataPath(pathLib, basePath, FILENAME_ITEMS);
 };
 
 export const ensureEnemyDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_ENEMIES);
+  return ensureDataPath(pathLib, basePath, FILENAME_ENEMIES);
 };
 
 export const ensureSkillDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_SKILLS);
+  return ensureDataPath(pathLib, basePath, FILENAME_SKILLS);
 };
 
 export const ensureTroopDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_TROOPS);
+  return ensureDataPath(pathLib, basePath, FILENAME_TROOPS);
 };
 
 export const ensureCommonEventDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_COMMON_EVENTS);
+  return ensureDataPath(pathLib, basePath, FILENAME_COMMON_EVENTS);
 };
 
 export const ensureWeaponDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_WEAPONS);
+  return ensureDataPath(pathLib, basePath, FILENAME_WEAPONS);
 };
 
 export const ensureArmorDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_ARMORS);
+  return ensureDataPath(pathLib, basePath, FILENAME_ARMORS);
 };
 
 export const ensureClassDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILANAME_CLASSES);
+  return ensureDataPath(pathLib, basePath, FILANAME_CLASSES);
 };
 
 export const ensureStateDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_STATES);
+  return ensureDataPath(pathLib, basePath, FILENAME_STATES);
 };
 
 export const ensureMapInfoDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_MAP_INFOS);
+  return ensureDataPath(pathLib, basePath, FILENAME_MAP_INFOS);
 };
 
 export const ensureSystemDataPath = (
   pathLib: PathJoin,
   basePath: string
 ): string => {
-  return ensureFolderPath(pathLib, basePath, FILENAME_SYSTEM);
+  return ensureDataPath(pathLib, basePath, FILENAME_SYSTEM);
 };
