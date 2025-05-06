@@ -25,9 +25,11 @@ import {
 } from "@sigureya/rpgtypes";
 
 type FsLib_ReadFile = Pick<typeof FsLib, "readFile">;
+type PathLib_Resolve = Pick<typeof PathLib, "resolve" | "sep">;
+
 export const callConvertHandler = async <T, R>(
   fsLib: FsLib_ReadFile,
-  pathLib: typeof PathLib,
+  pathLib: PathLib_Resolve,
   basePath: string,
   fileName: string,
   validateFn: (data: unknown) => data is T,
@@ -46,13 +48,14 @@ export const callConvertHandler = async <T, R>(
     );
     return ConvertFn(list, fileName);
   } catch {
+    // 例外発生時は全部undefinedにする。詳細なエラーチェックは後で作る
     return undefined;
   }
 };
 
 export const readDataFile = async <T>(
   fsLib: FsLib_ReadFile,
-  pathLib: Pick<typeof PathLib, "resolve" | "sep">,
+  pathLib: PathLib_Resolve,
   basePath: string,
   fileName: string,
   validateFn: (data: unknown) => data is T
@@ -68,7 +71,7 @@ export const readDataFile = async <T>(
 
 export const dispatchHandlers = async <T>(
   fsLib: FsLib_ReadFile,
-  pathLib: typeof PathLib,
+  pathLib: PathLib_Resolve,
   basePath: string,
   dataMapper: Partial<DataMapper<T>>
 ): Promise<Record<keyof DataMapper<T>, T | undefined>> => {
