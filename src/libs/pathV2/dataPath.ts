@@ -17,7 +17,7 @@ import type PathLib from "node:path";
 
 type PathJoin = Pick<typeof PathLib, "resolve" | "sep">;
 
-const ensureDataPath = (
+export const ensureDataPath = (
   pathLib: PathJoin,
   basePath: string,
   fileName: string
