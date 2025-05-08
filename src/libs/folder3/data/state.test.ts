@@ -8,7 +8,11 @@ import {
 
 import type { Data_State } from "@sigureya/rpgtypes";
 
-import { FILENAME_STATES, makeState, isDataState } from "@sigureya/rpgtypes";
+import {
+  FILENAME_STATES,
+  makeStateData,
+  isDataState,
+} from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -35,7 +39,7 @@ describe("writeRmmzStateData", async () => {
     writeFile: vi.fn(),
   };
   const basePath = "base/path";
-  const states: Data_State[] = [makeState()];
+  const states: Data_State[] = [makeStateData()];
   const space = 2;
 
   await writeRmmzStateData(mockPathLib, mockFs, basePath, states, space);
@@ -63,7 +67,7 @@ describe("readRmmzStateData", () => {
     expect(result).toEqual([]);
   });
   test("should return an array of states when the file contains valid data", async () => {
-    const state = makeState();
+    const state = makeStateData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, state, state]));
     const result = await readRmmzStateData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([state, state]);
@@ -72,7 +76,7 @@ describe("readRmmzStateData", () => {
 
 describe("isDataState", () => {
   test("should return true for valid state data", () => {
-    const state = makeState();
+    const state = makeStateData();
     expect(isDataState(state)).toBe(true);
   });
   test("should return false for invalid state data", () => {

@@ -6,7 +6,11 @@ import {
   writeRmmzSkillData,
 } from "./skill";
 import type { Data_Skill } from "@sigureya/rpgtypes";
-import { FILENAME_SKILLS, makeSkill, isDataSkill } from "@sigureya/rpgtypes";
+import {
+  FILENAME_SKILLS,
+  makeSkillData,
+  isDataSkill,
+} from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -32,7 +36,7 @@ describe("writeRmmzSkillData", async () => {
     writeFile: vi.fn(),
   };
   const basePath = "base/path";
-  const skills: Data_Skill[] = [makeSkill()];
+  const skills: Data_Skill[] = [makeSkillData()];
   const space = 2;
   await writeRmmzSkillData(mockPathLib, mockFs, basePath, skills, space);
   const [a, b, c]: string[] = mockFs.writeFile.mock.calls[0];
@@ -59,7 +63,7 @@ describe("readRmmzSkillData", () => {
     expect(result).toEqual([]);
   });
   test("should return an array of skills when the file contains valid data", async () => {
-    const skill: Data_Skill = makeSkill();
+    const skill: Data_Skill = makeSkillData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, skill]));
     const result = await readRmmzSkillData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([skill]);
@@ -68,7 +72,7 @@ describe("readRmmzSkillData", () => {
 
 describe("isDataSkill", () => {
   test("should return true for valid Data_Skill", () => {
-    const skill: Data_Skill = makeSkill();
+    const skill: Data_Skill = makeSkillData();
     expect(isDataSkill(skill)).toBe(true);
   });
 

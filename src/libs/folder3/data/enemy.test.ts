@@ -6,7 +6,11 @@ import {
 } from "./enemy";
 
 import type { Data_Enemy } from "@sigureya/rpgtypes";
-import { FILENAME_ENEMIES, makeEnemy, isDataEnemy } from "@sigureya/rpgtypes";
+import {
+  FILENAME_ENEMIES,
+  makeEnemyData,
+  isDataEnemy,
+} from "@sigureya/rpgtypes";
 
 describe("ensureEnemyDataPath", () => {
   const makePathLib = () => {
@@ -34,7 +38,7 @@ describe("writeRmmzEnemyData", async () => {
     writeFile: vi.fn(),
   };
   const basePath = "base/path";
-  const enemies: Data_Enemy[] = [makeEnemy()];
+  const enemies: Data_Enemy[] = [makeEnemyData()];
   const space = 2;
   await writeRmmzEnemyData(mockPathLib, mockFs, basePath, enemies, space);
   const [a, b, c]: string[] = mockFs.writeFile.mock.calls[0];
@@ -64,7 +68,7 @@ describe("readRmmzEnemyData", () => {
     expect(result).toEqual([]);
   });
   test("should return the correct enemy data", async () => {
-    const enemyData = [makeEnemy()];
+    const enemyData = [makeEnemyData()];
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, ...enemyData]));
     const result = await readRmmzEnemyData(mockPathLib, mockFs, basePath);
     expect(result).toEqual(enemyData);
@@ -78,7 +82,7 @@ describe("readRmmzEnemyData", () => {
 
 describe("isDataEnemy", () => {
   test("should return true for valid Data_Enemy", () => {
-    const enemy = makeEnemy();
+    const enemy = makeEnemyData();
     expect(isDataEnemy(enemy)).toBe(true);
   });
 

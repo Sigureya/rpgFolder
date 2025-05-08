@@ -5,7 +5,11 @@ import {
   writeRmmzActorData,
 } from "./actor";
 import type { Data_Actor } from "@sigureya/rpgtypes";
-import { FILENAME_ACTORS, isDataActor, makeActor } from "@sigureya/rpgtypes";
+import {
+  FILENAME_ACTORS,
+  isDataActor,
+  makeActorData,
+} from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -31,7 +35,7 @@ describe("writeRmmzActorData", async () => {
     writeFile: vi.fn(),
   };
   const basePath = "base/path";
-  const actors: Data_Actor[] = [makeActor()];
+  const actors: Data_Actor[] = [makeActorData()];
   const space = 2;
 
   await writeRmmzActorData(mockPathLib, mockFs, basePath, actors, space);
@@ -60,14 +64,14 @@ describe("readRmmzActorData", () => {
   });
 
   test("should return an array with valid actor data when the file contains null and actor data", async () => {
-    const actor = makeActor();
+    const actor = makeActorData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, actor]));
     const result = await readRmmzActorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([actor]);
   });
 
   test("should return an array with valid actor data when the file contains only actor data", async () => {
-    const actor = makeActor();
+    const actor = makeActorData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([actor]));
     const result = await readRmmzActorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([actor]);
@@ -81,7 +85,7 @@ describe("readRmmzActorData", () => {
 
 describe("isDataActor", () => {
   test("should return true for valid actor data", () => {
-    const actor = makeActor();
+    const actor = makeActorData();
     expect(isDataActor(actor)).toBe(true);
   });
 

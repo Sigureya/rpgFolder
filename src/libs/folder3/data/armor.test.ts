@@ -5,7 +5,11 @@ import {
   writeRmmzArmorData,
 } from "./armor";
 import type { Data_Armor } from "@sigureya/rpgtypes";
-import { FILENAME_ARMORS, makeArmor, isDataArmor } from "@sigureya/rpgtypes";
+import {
+  FILENAME_ARMORS,
+  makeArmorData,
+  isDataArmor,
+} from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -31,7 +35,7 @@ describe("writeRmmzArmorData", async () => {
     writeFile: vi.fn(),
   };
   const basePath = "base/path";
-  const armors: Data_Armor[] = [makeArmor()];
+  const armors: Data_Armor[] = [makeArmorData()];
   const space = 2;
 
   await writeRmmzArmorData(mockPathLib, mockFs, basePath, armors, space);
@@ -59,7 +63,7 @@ describe("readRmmzArmorData", () => {
     expect(result).toEqual([]);
   });
   test("should return the correct armor data", async () => {
-    const mockArmor = makeArmor();
+    const mockArmor = makeArmorData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, mockArmor]));
     const result = await readRmmzArmorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([mockArmor]);
@@ -70,7 +74,7 @@ describe("readRmmzArmorData", () => {
     expect(result).toEqual([]);
   });
   test("should return the correct armor data when the file contains only armor data", async () => {
-    const mockArmor = makeArmor();
+    const mockArmor = makeArmorData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([mockArmor]));
     const result = await readRmmzArmorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([mockArmor]);
@@ -78,7 +82,7 @@ describe("readRmmzArmorData", () => {
 });
 describe("isDataArmor", () => {
   test("should return true for valid armor data", () => {
-    const armor = makeArmor();
+    const armor = makeArmorData();
     expect(isDataArmor(armor)).toBe(true);
   });
   test("should return false for invalid armor data", () => {
