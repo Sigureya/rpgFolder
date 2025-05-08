@@ -5,7 +5,7 @@ import {
   writeRmmzArmorData,
 } from "./armor";
 import type { Data_Armor } from "@sigureya/rpgtypes";
-import { FILENAME_ARMORS, makeArmor } from "@sigureya/rpgtypes";
+import { FILENAME_ARMORS, makeArmor, isDataArmor } from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -74,5 +74,15 @@ describe("readRmmzArmorData", () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([mockArmor]));
     const result = await readRmmzArmorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([mockArmor]);
+  });
+});
+describe("isDataArmor", () => {
+  test("should return true for valid armor data", () => {
+    const armor = makeArmor();
+    expect(isDataArmor(armor)).toBe(true);
+  });
+  test("should return false for invalid armor data", () => {
+    const invalidArmor = { id: 1, name: "Invalid Armor" };
+    expect(isDataArmor(invalidArmor)).toBe(false);
   });
 });

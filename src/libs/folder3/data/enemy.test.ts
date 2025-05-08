@@ -6,7 +6,7 @@ import {
 } from "./enemy";
 
 import type { Data_Enemy } from "@sigureya/rpgtypes";
-import { FILENAME_ENEMIES, makeEnemy } from "@sigureya/rpgtypes";
+import { FILENAME_ENEMIES, makeEnemy, isDataEnemy } from "@sigureya/rpgtypes";
 
 describe("ensureEnemyDataPath", () => {
   const makePathLib = () => {
@@ -73,5 +73,17 @@ describe("readRmmzEnemyData", () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([]));
     const result = await readRmmzEnemyData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([]);
+  });
+});
+
+describe("isDataEnemy", () => {
+  test("should return true for valid Data_Enemy", () => {
+    const enemy = makeEnemy();
+    expect(isDataEnemy(enemy)).toBe(true);
+  });
+
+  test("should return false for invalid Data_Enemy", () => {
+    const invalidEnemy = { id: 1, name: "Invalid Enemy" };
+    expect(isDataEnemy(invalidEnemy)).toBe(false);
   });
 });

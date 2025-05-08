@@ -6,7 +6,7 @@ import {
   writeRmmzItemData,
 } from "./item";
 import type { Data_Item } from "@sigureya/rpgtypes";
-import { FILENAME_ITEMS, makeItem } from "@sigureya/rpgtypes";
+import { FILENAME_ITEMS, makeItem, isDataItem } from "@sigureya/rpgtypes";
 const makePathLib = () => {
   return {
     resolve: vi.fn((...args: string[]) => args.join("/")),
@@ -67,5 +67,16 @@ describe("readRmmzItemData", () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, {}]));
     const result = await readRmmzItemData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([]);
+  });
+});
+
+describe("isDataItem", () => {
+  test("should return true for valid Data_Item", () => {
+    const item: Data_Item = makeItem();
+    expect(isDataItem(item)).toBe(true);
+  });
+  test("should return false for invalid Data_Item", () => {
+    const invalidItem = { id: 1, name: "Invalid Item" };
+    expect(isDataItem(invalidItem)).toBe(false);
   });
 });

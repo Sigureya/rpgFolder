@@ -8,7 +8,7 @@ import {
 
 import type { Data_State } from "@sigureya/rpgtypes";
 
-import { FILENAME_STATES, makeState } from "@sigureya/rpgtypes";
+import { FILENAME_STATES, makeState, isDataState } from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -67,5 +67,16 @@ describe("readRmmzStateData", () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, state, state]));
     const result = await readRmmzStateData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([state, state]);
+  });
+});
+
+describe("isDataState", () => {
+  test("should return true for valid state data", () => {
+    const state = makeState();
+    expect(isDataState(state)).toBe(true);
+  });
+  test("should return false for invalid state data", () => {
+    const invalidState = { id: 1, name: "Invalid State" };
+    expect(isDataState(invalidState)).toBe(false);
   });
 });

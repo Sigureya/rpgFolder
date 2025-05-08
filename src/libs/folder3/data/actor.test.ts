@@ -5,7 +5,7 @@ import {
   writeRmmzActorData,
 } from "./actor";
 import type { Data_Actor } from "@sigureya/rpgtypes";
-import { FILENAME_ACTORS, makeActor } from "@sigureya/rpgtypes";
+import { FILENAME_ACTORS, isDataActor, makeActor } from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -76,5 +76,17 @@ describe("readRmmzActorData", () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([{ id: 404 }]));
     const result = await readRmmzActorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([]);
+  });
+});
+
+describe("isDataActor", () => {
+  test("should return true for valid actor data", () => {
+    const actor = makeActor();
+    expect(isDataActor(actor)).toBe(true);
+  });
+
+  test("should return false for invalid actor data", () => {
+    const invalidActor = { id: 404 };
+    expect(isDataActor(invalidActor)).toBe(false);
   });
 });

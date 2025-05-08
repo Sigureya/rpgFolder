@@ -7,7 +7,7 @@ import {
 } from "./weapon";
 
 import type { Data_Weapon } from "@sigureya/rpgtypes";
-import { FILENAME_WEAPONS, makeWeapon } from "@sigureya/rpgtypes";
+import { FILENAME_WEAPONS, makeWeapon, isDataWeapon } from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -78,5 +78,16 @@ describe("readRmmzWeaponData", () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, weapon]));
     const result = await readRmmzWeaponData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([weapon]);
+  });
+});
+
+describe("isDataWeapon", () => {
+  test("should return true for valid Data_Weapon", () => {
+    const weapon: Data_Weapon = makeWeapon();
+    expect(isDataWeapon(weapon)).toBe(true);
+  });
+  test("should return false for invalid Data_Weapon", () => {
+    const invalidWeapon = { id: 1, name: "Sword" } as unknown as Data_Weapon;
+    expect(isDataWeapon(invalidWeapon)).toBe(false);
   });
 });

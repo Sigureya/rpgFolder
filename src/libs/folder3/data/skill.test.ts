@@ -6,7 +6,7 @@ import {
   writeRmmzSkillData,
 } from "./skill";
 import type { Data_Skill } from "@sigureya/rpgtypes";
-import { FILENAME_SKILLS, makeSkill } from "@sigureya/rpgtypes";
+import { FILENAME_SKILLS, makeSkill, isDataSkill } from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -63,5 +63,17 @@ describe("readRmmzSkillData", () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, skill]));
     const result = await readRmmzSkillData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([skill]);
+  });
+});
+
+describe("isDataSkill", () => {
+  test("should return true for valid Data_Skill", () => {
+    const skill: Data_Skill = makeSkill();
+    expect(isDataSkill(skill)).toBe(true);
+  });
+
+  test("should return false for invalid Data_Skill", () => {
+    const invalidSkill = { id: 1, name: "Invalid Skill" };
+    expect(isDataSkill(invalidSkill)).toBe(false);
   });
 });
