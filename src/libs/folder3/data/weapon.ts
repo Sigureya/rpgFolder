@@ -8,11 +8,7 @@ import type {
   FsLib_WriteFile,
   PathLib_Resolve,
 } from "./detail/libTypes";
-import {
-  ensureDataPath,
-  readRmmzDataListFile,
-  writeDataFile,
-} from "./detail/indentifideItems";
+import { ensureDataPath, readRmmzDataListFile, writeDataFile } from "./detail";
 
 export const ensureWeaponDataPath = (
   pathLib: PathLib_Resolve,
