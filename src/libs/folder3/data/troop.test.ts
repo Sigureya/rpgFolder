@@ -5,7 +5,8 @@ import {
   writeRmmzTroopData,
 } from "./troop";
 import type { Data_Troop } from "@sigureya/rpgtypes";
-import { makeTroopData } from "@sigureya/rpgtypes";
+import { makeTroopData, FILENAME_TROOPS } from "@sigureya/rpgtypes";
+const expectedPath = `base/path/data/${FILENAME_TROOPS}` as const;
 
 describe("ensureTroopDataPath", () => {
   const mockPathLib = {
@@ -13,7 +14,6 @@ describe("ensureTroopDataPath", () => {
     sep: "/" as const,
   };
   const basePath = "base/path";
-  const expectedPath = `base/path/data/troops.json` as const;
   test("should return the correct path", () => {
     const result = ensureTroopDataPath(mockPathLib, basePath);
     expect(result).toBe(expectedPath);
@@ -34,7 +34,7 @@ describe("writeRmmzTroopData", () => {
   test("should write troop data to the correct path", async () => {
     await writeRmmzTroopData(mockPathLib, mockFs, basePath, troops, space);
     expect(mockFs.writeFile).toHaveBeenCalledWith(
-      `base/path/data/troops.json`,
+      expectedPath,
       JSON.stringify([null, ...troops], null, space),
       "utf-8"
     );
