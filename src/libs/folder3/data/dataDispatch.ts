@@ -1,7 +1,6 @@
 import type PathLib from "node:path";
 import type FsLib from "node:fs/promises";
 import type { DataMapper } from "./types";
-import { ensureDataPath } from "src/libs/pathV2";
 import type { Data_CommonEvent, Data_Troop } from "@sigureya/rpgtypes";
 import {
   FILENAME_ITEMS,
@@ -12,9 +11,7 @@ import {
   FILENAME_WEAPONS,
   FILANAME_CLASSES,
   FILENAME_STATES,
-  FILENAME_ACTORS,
   FILENAME_ARMORS,
-  isDataActor,
   isDataArmor,
   isDataEnemy,
   isDataClass,
@@ -22,7 +19,10 @@ import {
   isDataSkill,
   isDataState,
   isDataWeapon,
+  SRC_DATA_ACTOR,
 } from "@sigureya/rpgtypes";
+import { readDataFile } from "./detail/indentifideItems";
+import { readRmmzActorData } from "./actor";
 
 type FsLib_ReadFile = Pick<typeof FsLib, "readFile">;
 type PathLib_Resolve = Pick<typeof PathLib, "resolve" | "sep">;
@@ -53,22 +53,6 @@ export const callConvertHandler = async <T, R>(
   }
 };
 
-export const readDataFile = async <T>(
-  fsLib: FsLib_ReadFile,
-  pathLib: PathLib_Resolve,
-  basePath: string,
-  fileName: string,
-  validateFn: (data: unknown) => data is T
-): Promise<T[]> => {
-  const path: string = ensureDataPath(pathLib, basePath, fileName);
-  const jsonText: string = await fsLib.readFile(path, "utf-8");
-  const obj = JSON.parse(jsonText);
-  if (!Array.isArray(obj)) {
-    throw new Error(`Invalid data format in ${fileName}`);
-  }
-  return obj.filter((item) => validateFn(item));
-};
-
 export const dispatchHandlers = async <T>(
   fsLib: FsLib_ReadFile,
   pathLib: PathLib_Resolve,
@@ -76,14 +60,12 @@ export const dispatchHandlers = async <T>(
   dataMapper: Partial<DataMapper<T>>
 ): Promise<Record<keyof DataMapper<T>, T | undefined>> => {
   return {
-    actor: await callConvertHandler(
-      fsLib,
-      pathLib,
-      basePath,
-      FILENAME_ACTORS,
-      isDataActor,
-      dataMapper.actor
-    ),
+    actor: dataMapper.actor
+      ? dataMapper.actor(
+          await readRmmzActorData(pathLib, fsLib, basePath),
+          SRC_DATA_ACTOR
+        )
+      : undefined,
     armor: await callConvertHandler(
       fsLib,
       pathLib,

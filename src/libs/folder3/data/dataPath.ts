@@ -1,6 +1,5 @@
 import {
   FILANAME_CLASSES,
-  FILENAME_ACTORS,
   FILENAME_ARMORS,
   FILENAME_COMMON_EVENTS,
   FILENAME_ENEMIES,
@@ -11,21 +10,11 @@ import {
   FILENAME_SYSTEM,
   FILENAME_TROOPS,
   FILENAME_WEAPONS,
-  FOLDER_DATA,
 } from "@sigureya/rpgtypes";
 import type PathLib from "node:path";
+import { ensureDataPath } from "./detail/indentifideItems";
 
 type PathJoin = Pick<typeof PathLib, "resolve" | "sep">;
-
-export const ensureDataPath = (
-  pathLib: PathJoin,
-  basePath: string,
-  fileName: string
-): string => {
-  return basePath.endsWith(`${pathLib.sep}${FOLDER_DATA}`)
-    ? pathLib.resolve(basePath, fileName)
-    : pathLib.resolve(basePath, FOLDER_DATA, fileName);
-};
 
 const makeMapFileName = (mapId: number) => {
   return `Map${String(mapId).padStart(3, "0")}.json` as const;
@@ -38,13 +27,6 @@ export const ensureMapDataPath = (
 ) => {
   const fileName = makeMapFileName(mapId);
   return ensureDataPath(pathLib, basePath, fileName);
-};
-
-export const ensureActorDataPath = (
-  pathLib: PathJoin,
-  basePath: string
-): string => {
-  return ensureDataPath(pathLib, basePath, FILENAME_ACTORS);
 };
 
 export const ensureItemDataPath = (
