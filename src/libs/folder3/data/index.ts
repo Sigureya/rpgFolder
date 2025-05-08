@@ -6,3 +6,4 @@ export * from "./item";
 export * from "./skill";
 export * from "./state";
 export * from "./weapon";
+export * from "./troop";
