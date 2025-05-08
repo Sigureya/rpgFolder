@@ -1,6 +1,6 @@
 import type PathLib from "node:path";
 import type FsLib from "node:fs/promises";
-import type { DataMapper } from "./types";
+import type { DataMapper } from "./data/types";
 import type { Data_CommonEvent, Data_Troop } from "@sigureya/rpgtypes";
 import {
   FILENAME_ITEMS,
@@ -11,8 +11,6 @@ import {
   FILENAME_WEAPONS,
   FILANAME_CLASSES,
   FILENAME_STATES,
-  FILENAME_ARMORS,
-  isDataArmor,
   isDataEnemy,
   isDataClass,
   isDataItem,
@@ -20,9 +18,19 @@ import {
   isDataState,
   isDataWeapon,
   SRC_DATA_ACTOR,
+  SRC_DATA_ARMOR,
+  SRC_DATA_CLASS,
+  SRC_DATA_ITEMS,
+  SRC_DATA_SKILL,
+  SRC_DATA_STATE,
+  SRC_DATA_WEAPON,
+  SRC_DATA_ENEMY,
 } from "@sigureya/rpgtypes";
-import { readDataFile } from "./detail/indentifideItems";
-import { readRmmzActorData } from "./actor";
+import { readDataFile } from "./data/detail/detail";
+import { readRmmzActorData } from "./data/actor";
+import { readRmmzArmorData } from "./data/armor";
+import { readRmmzEnemyData } from "./data/enemy";
+import { readRmmzItemData } from "./data/item";
 
 type FsLib_ReadFile = Pick<typeof FsLib, "readFile">;
 type PathLib_Resolve = Pick<typeof PathLib, "resolve" | "sep">;
@@ -66,46 +74,29 @@ export const dispatchHandlers = async <T>(
           SRC_DATA_ACTOR
         )
       : undefined,
-    armor: await callConvertHandler(
-      fsLib,
-      pathLib,
-      basePath,
-      FILENAME_ARMORS,
-      isDataArmor,
-      dataMapper.armor
-    ),
-    enemy: await callConvertHandler(
-      fsLib,
-      pathLib,
-      basePath,
-      FILENAME_ENEMIES,
-      isDataEnemy,
-      dataMapper.enemy
-    ),
-    class: await callConvertHandler(
-      fsLib,
-      pathLib,
-      basePath,
-      FILANAME_CLASSES,
-      isDataClass,
-      dataMapper.class
-    ),
-    item: await callConvertHandler(
-      fsLib,
-      pathLib,
-      basePath,
-      FILENAME_ITEMS,
-      isDataItem,
-      dataMapper.item
-    ),
-    skill: await callConvertHandler(
-      fsLib,
-      pathLib,
-      basePath,
-      FILENAME_SKILLS,
-      isDataSkill,
-      dataMapper.skill
-    ),
+    armor: dataMapper.armor
+      ? dataMapper.armor(
+          await readRmmzArmorData(pathLib, fsLib, basePath),
+          SRC_DATA_ARMOR
+        )
+      : undefined,
+
+    enemy: dataMapper.enemy
+      ? dataMapper.enemy(
+          await readRmmzEnemyData(pathLib, fsLib, basePath),
+          SRC_DATA_ENEMY
+        )
+      : undefined,
+    class: dataMapper.class ? dataMapper.class([], SRC_DATA_CLASS) : undefined,
+    item: dataMapper.item
+      ? dataMapper.item(
+          await readRmmzItemData(pathLib, fsLib, basePath),
+          SRC_DATA_ITEMS
+        )
+      : undefined,
+
+    skill: dataMapper.skill ? dataMapper.skill([], SRC_DATA_SKILL) : undefined,
+
     state: await callConvertHandler(
       fsLib,
       pathLib,

@@ -28,7 +28,7 @@ import {
   makeState,
   makeWeapon,
 } from "@sigureya/rpgtypes";
-import { readDataFile } from "./detail/indentifideItems";
+import { readDataFile } from "./data/detail/detail";
 
 const makeMockFs = (func: (filepath: string) => Promise<string>) => {
   return {
