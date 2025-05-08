@@ -53,16 +53,28 @@ describe("readRmmzActorData", () => {
     readFile: vi.fn(),
   };
   const basePath = "base/path";
-
-  test("should read actor data from the correct path", async () => {
+  test("should return an empty array when the file contains only null", async () => {
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null]));
     const result = await readRmmzActorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([]);
   });
-  test("should read actor data from the correct path", async () => {
+
+  test("should return an array with valid actor data when the file contains null and actor data", async () => {
     const actor = makeActor();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, actor]));
     const result = await readRmmzActorData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([actor]);
+  });
+
+  test("should return an array with valid actor data when the file contains only actor data", async () => {
+    const actor = makeActor();
+    mockFs.readFile.mockResolvedValueOnce(JSON.stringify([actor]));
+    const result = await readRmmzActorData(mockPathLib, mockFs, basePath);
+    expect(result).toEqual([actor]);
+  });
+  test("should throw an error when the file contains invalid data", async () => {
+    mockFs.readFile.mockResolvedValueOnce(JSON.stringify([{ id: 404 }]));
+    const result = await readRmmzActorData(mockPathLib, mockFs, basePath);
+    expect(result).toEqual([]);
   });
 });
