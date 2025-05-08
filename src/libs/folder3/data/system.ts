@@ -5,7 +5,7 @@ import type {
   FsLib_WriteFile,
   PathLib_Resolve,
 } from "./detail/libTypes";
-import { ensureDataPath } from "./detail/indentifideItems";
+import { ensureDataPath } from "./detail";
 
 // 仮置き。型が複雑なので実装は後回し
 const isDataSystem = (data: unknown): data is Data_System => {
