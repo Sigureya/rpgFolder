@@ -7,7 +7,11 @@ import {
 } from "./weapon";
 
 import type { Data_Weapon } from "@sigureya/rpgtypes";
-import { FILENAME_WEAPONS, makeWeapon, isDataWeapon } from "@sigureya/rpgtypes";
+import {
+  FILENAME_WEAPONS,
+  makeWeaponData,
+  isDataWeapon,
+} from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -33,7 +37,7 @@ describe("writeRmmzWeaponData", async () => {
     writeFile: vi.fn(),
   };
   const basePath = "base/path";
-  const weapons: Data_Weapon[] = [makeWeapon()];
+  const weapons: Data_Weapon[] = [makeWeaponData()];
   const space = 2;
 
   await writeRmmzWeaponData(mockPathLib, mockFs, basePath, weapons, space);
@@ -62,7 +66,7 @@ describe("readRmmzWeaponData", () => {
   });
 
   test("should return the correct weapon data", async () => {
-    const weapon = makeWeapon();
+    const weapon = makeWeaponData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, weapon]));
     const result = await readRmmzWeaponData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([weapon]);
@@ -74,7 +78,7 @@ describe("readRmmzWeaponData", () => {
   });
 
   test("should return the correct weapon data when the file contains only weapon data", async () => {
-    const weapon = makeWeapon();
+    const weapon = makeWeaponData();
     mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, weapon]));
     const result = await readRmmzWeaponData(mockPathLib, mockFs, basePath);
     expect(result).toEqual([weapon]);
@@ -83,7 +87,7 @@ describe("readRmmzWeaponData", () => {
 
 describe("isDataWeapon", () => {
   test("should return true for valid Data_Weapon", () => {
-    const weapon: Data_Weapon = makeWeapon();
+    const weapon: Data_Weapon = makeWeaponData();
     expect(isDataWeapon(weapon)).toBe(true);
   });
   test("should return false for invalid Data_Weapon", () => {

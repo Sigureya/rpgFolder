@@ -3,28 +3,28 @@ import { describe, expect, test, vi } from "vitest";
 import type { DataMapper, GameDataFolder } from "./dispatch";
 import { mappingData } from "./dispatch";
 import {
-  makeActor,
-  makeArmor,
-  makeClass,
-  makeState,
-  makeItem,
-  makeSkill,
-  makeEnemy,
-  makeWeapon,
   makeTroopData,
   makeCommonEventData,
+  makeActorData,
+  makeArmorData,
+  makeClassData,
+  makeEnemyData,
+  makeItemData,
+  makeSkillData,
+  makeStateData,
+  makeWeaponData,
 } from "@sigureya/rpgtypes";
 
 const makeMockFolder = (): MockedObject<GameDataFolder> => ({
-  readActors: vi.fn(() => Promise.resolve([makeActor()])),
-  readArmors: vi.fn(() => Promise.resolve([makeArmor()])),
-  readEnemies: vi.fn(() => Promise.resolve([makeEnemy()])),
-  readClasses: vi.fn(() => Promise.resolve([makeClass()])),
-  readItems: vi.fn(() => Promise.resolve([makeItem()])),
-  readSkills: vi.fn(() => Promise.resolve([makeSkill()])),
-  readStates: vi.fn(() => Promise.resolve([makeState()])),
+  readActors: vi.fn(() => Promise.resolve([makeActorData()])),
+  readArmors: vi.fn(() => Promise.resolve([makeArmorData()])),
+  readEnemies: vi.fn(() => Promise.resolve([makeEnemyData()])),
+  readClasses: vi.fn(() => Promise.resolve([makeClassData()])),
+  readItems: vi.fn(() => Promise.resolve([makeItemData()])),
+  readSkills: vi.fn(() => Promise.resolve([makeSkillData()])),
+  readStates: vi.fn(() => Promise.resolve([makeStateData()])),
   readTroops: vi.fn(() => Promise.resolve([makeTroopData()])),
-  readWeapons: vi.fn(() => Promise.resolve([makeWeapon()])),
+  readWeapons: vi.fn(() => Promise.resolve([makeWeaponData()])),
   readCommonEvents: vi.fn(() => Promise.resolve([makeCommonEventData()])),
 });
 

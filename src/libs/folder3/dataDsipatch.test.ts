@@ -12,21 +12,21 @@ import type {
 } from "@sigureya/rpgtypes";
 import {
   isDataActor,
-  makeActor,
   isDataArmor,
-  makeArmor,
   isDataClass,
   isDataEnemy,
   isDataItem,
   isDataSkill,
   isDataState,
   isDataWeapon,
-  makeClass,
-  makeEnemy,
-  makeItem,
-  makeSkill,
-  makeState,
-  makeWeapon,
+  makeActorData,
+  makeArmorData,
+  makeClassData,
+  makeEnemyData,
+  makeItemData,
+  makeSkillData,
+  makeStateData,
+  makeWeaponData,
 } from "@sigureya/rpgtypes";
 import { readDataFile } from "./data/detail/detail";
 
@@ -42,7 +42,7 @@ const makeMockPath = (path: string) => ({
 
 describe("readDataFile", () => {
   test("should read file and parse JSON", async () => {
-    const MockActor: string = JSON.stringify([null, makeActor()]);
+    const MockActor: string = JSON.stringify([null, makeActorData()]);
     const mockFs = makeMockFs(async () => MockActor);
     const mockPath = makeMockPath("test/test.json");
 
@@ -53,7 +53,7 @@ describe("readDataFile", () => {
       "test.json",
       (x) => isDataActor(x)
     );
-    expect(result).toEqual([makeActor()]);
+    expect(result).toEqual([makeActorData()]);
   });
 
   test("should return empty array for invalid JSON", async () => {
@@ -93,42 +93,42 @@ describe("validdateFunction", () => {
   };
 
   describe("isDataActor", () => {
-    const actor: Data_Actor = makeActor();
+    const actor: Data_Actor = makeActorData();
     validateFunctionTest(isDataActor, actor);
   });
 
   describe("isDataArmor", () => {
-    const armor: Data_Armor = makeArmor();
+    const armor: Data_Armor = makeArmorData();
     validateFunctionTest(isDataArmor, armor);
   });
 
   describe("isDataClass", () => {
-    const data: Data_Class = makeClass();
+    const data: Data_Class = makeClassData();
     validateFunctionTest(isDataClass, data);
   });
 
   describe("isDataEnemy", () => {
-    const data: Data_Enemy = makeEnemy();
+    const data: Data_Enemy = makeEnemyData();
     validateFunctionTest(isDataEnemy, data);
   });
 
   describe("isDataItem", () => {
-    const data: Data_Item = makeItem();
+    const data: Data_Item = makeItemData();
     validateFunctionTest(isDataItem, data);
   });
 
   describe("isDataSkill", () => {
-    const data: Data_Skill = makeSkill();
+    const data: Data_Skill = makeSkillData();
     validateFunctionTest(isDataSkill, data);
   });
 
   describe("isDataState", () => {
-    const data: Data_State = makeState();
+    const data: Data_State = makeStateData();
     validateFunctionTest(isDataState, data);
   });
 
   describe("isDataWeapon", () => {
-    const data: Data_Weapon = makeWeapon();
+    const data: Data_Weapon = makeWeaponData();
     validateFunctionTest(isDataWeapon, data);
   });
 });

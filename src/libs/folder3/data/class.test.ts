@@ -7,7 +7,11 @@ import {
 } from "./class";
 
 import type { Data_Class } from "@sigureya/rpgtypes";
-import { FILENAME_CLASSES, makeClass, isDataClass } from "@sigureya/rpgtypes";
+import {
+  FILENAME_CLASSES,
+  makeClassData,
+  isDataClass,
+} from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
@@ -33,7 +37,7 @@ describe("writeRmmzClassData", async () => {
     writeFile: vi.fn(),
   };
   const basePath = "base/path";
-  const classes: Data_Class[] = [makeClass()];
+  const classes: Data_Class[] = [makeClassData()];
   const space = 2;
 
   await writeRmmzClassData(mockPathLib, mockFs, basePath, classes, space);
@@ -63,7 +67,7 @@ describe("readRmmzClassData", () => {
 });
 
 describe("isDataClass", () => {
-  const classData: Data_Class = makeClass();
+  const classData: Data_Class = makeClassData();
   test("should return true for valid data", () => {
     expect(isDataClass(classData)).toBe(true);
   });
