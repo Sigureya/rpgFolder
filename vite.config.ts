@@ -1,6 +1,8 @@
 import { defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import dts from "vite-plugin-dts";
+
 import { middleware } from "./src/examples/server/devServer";
 
 const viewBuild = (): UserConfig => ({
@@ -13,6 +15,12 @@ const viewBuild = (): UserConfig => ({
       },
     },
   ],
+  resolve: {
+    alias: {
+      "@lib/nodeLib": path.resolve(__dirname, "src/libs/nodeLib"),
+      "@constants": path.resolve(__dirname, "src/libs/constants"),
+    },
+  },
 });
 
 const libName = "rpg-folder" as const;
@@ -28,7 +36,8 @@ const libBuild = (): UserConfig => ({
     },
     sourcemap: true,
     rollupOptions: {
-      external: (id) => id.endsWith(".test.ts"),
+      external: (id) =>
+        id.endsWith(".test.ts") || ["@sigureya/rpgtypes"].includes(id),
     },
   },
   resolve: {
@@ -37,9 +46,18 @@ const libBuild = (): UserConfig => ({
       "@constants": path.resolve(__dirname, "src/libs/constants"),
     },
   },
+  plugins: [
+    dts({
+      outDir: "dist/types",
+      //      include: ["src/libs/**/*.ts"],
+      exclude: ["./**/*.test.ts"],
+      //insertTypesEntry: true, // package.json に "types" フィールドを自動追加
+      //  rollupTypes: true, // ロールアップされた型情報を生成
+    }),
+  ],
 });
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) =>
-  mode === "lib" ? libBuild() : viewBuild()
-);
+export default defineConfig(({ mode }) => {
+  return mode === "lib" ? libBuild() : viewBuild();
+});
