@@ -40,3 +40,26 @@ describe("writeRmmzTroopData", () => {
     );
   });
 });
+
+describe("readRmmzTroopData", () => {
+  const mockPathLib = {
+    resolve: vi.fn((...args: string[]) => args.join("/")),
+    sep: "/" as const,
+  };
+  const mockFs = {
+    readFile: vi.fn(),
+  };
+  const basePath = "base/path";
+  test("should read troop data from the correct path", async () => {
+    mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null]));
+    await readRmmzTroopData(mockPathLib, mockFs, basePath);
+    expect(mockFs.readFile).toHaveBeenCalledWith(expectedPath, "utf-8");
+  });
+
+  test("should return the correct data", async () => {
+    const troops: Data_Troop[] = [makeTroopData()];
+    mockFs.readFile.mockResolvedValueOnce(JSON.stringify([null, ...troops]));
+    const result = await readRmmzTroopData(mockPathLib, mockFs, basePath);
+    expect(result).toEqual(troops);
+  });
+});

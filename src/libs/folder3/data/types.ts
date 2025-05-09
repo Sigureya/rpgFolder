@@ -23,3 +23,13 @@ export interface DataMapper<T> {
   weapon: (data: Data_Weapon[], fileName: string) => T;
   commonEvent: (data: Data_CommonEvent[], fileName: string) => T;
 }
+export interface DataTable {
+  actors: Data_Actor[];
+  enemies: Data_Enemy[];
+  classes: Data_Class[];
+  items: Data_Item[];
+  skills: Data_Skill[];
+  states: Data_State[];
+  armors: Data_Armor[];
+  weapons: Data_Weapon[];
+}
