@@ -1,7 +1,6 @@
 import type PathLib from "node:path";
-import FsLib from "node:fs/promises";
 import { expect, vi } from "vitest";
-import { writeFile, type Dirent } from "node:fs";
+import { type Dirent } from "node:fs";
 
 export const makeMockPath = (
   result: {
