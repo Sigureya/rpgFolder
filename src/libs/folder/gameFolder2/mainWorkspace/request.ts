@@ -1,4 +1,4 @@
-interface H<T> {
+export interface H<T> {
   gameTiitle: string;
   toolName: string;
   commandName: string;
