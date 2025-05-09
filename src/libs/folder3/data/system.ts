@@ -9,7 +9,7 @@ import { ensureDataPath } from "./detail";
 
 // 仮置き。型が複雑なので実装は後回し
 const isDataSystem = (data: unknown): data is Data_System => {
-  return true;
+  return !!data;
 };
 
 export const ensureSystemDataPath = (

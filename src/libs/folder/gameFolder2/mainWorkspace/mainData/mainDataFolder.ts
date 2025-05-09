@@ -21,10 +21,10 @@ import {
   FILENAME_ENEMIES,
   FILENAME_SKILLS,
   FILENAME_TROOPS,
-  FILANAME_CLASSES,
   FILENAME_COMMON_EVENTS,
   FILENAME_STATES,
   FOLDER_DATA,
+  FILENAME_CLASSES,
 } from "@sigureya/rpgtypes";
 import { readData, writeData } from "./utils";
 import type { GameDataFolder } from "./dispatch";
@@ -99,10 +99,10 @@ export class GameDataFolderClass implements GameDataFolder {
     return this.writeData(FILENAME_TROOPS, data);
   }
   async readClasses(): Promise<Data_Class[]> {
-    return this.readData<Data_Class>(FILANAME_CLASSES);
+    return this.readData<Data_Class>(FILENAME_CLASSES);
   }
   async writeClasses(data: Data_Class[]): Promise<void> {
-    return this.writeData(FILANAME_CLASSES, data);
+    return this.writeData(FILENAME_CLASSES, data);
   }
   async readCommonEvents(): Promise<Data_CommonEvent[]> {
     return this.readData(FILENAME_COMMON_EVENTS);
