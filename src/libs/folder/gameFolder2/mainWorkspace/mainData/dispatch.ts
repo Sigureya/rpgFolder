@@ -17,7 +17,7 @@ import {
   FILENAME_TROOPS,
   FILENAME_COMMON_EVENTS,
   FILENAME_WEAPONS,
-  FILANAME_CLASSES,
+  FILENAME_CLASSES,
   FILENAME_STATES,
   FILENAME_ACTORS,
   FILENAME_ARMORS,
@@ -64,7 +64,7 @@ export const mappingData = async <T>(
       ? mapper.enemy(await folder.readEnemies(), FILENAME_ENEMIES)
       : undefined,
     class: mapper.class
-      ? mapper.class(await folder.readClasses(), FILANAME_CLASSES)
+      ? mapper.class(await folder.readClasses(), FILENAME_CLASSES)
       : undefined,
     item: mapper.item
       ? mapper.item(await folder.readItems(), FILENAME_ITEMS)
