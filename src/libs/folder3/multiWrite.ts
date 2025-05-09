@@ -24,7 +24,7 @@ export const writeDataFiles = async (
   pathLib: PathLib_Resolve,
   basePath: string,
   data: DataTable
-) => {
+): Promise<void[]> => {
   return Promise.all([
     ggg(() => writeRmmzActorData(pathLib, fsLib, basePath, data.actors)),
     ggg(() => writeRmmzEnemyData(pathLib, fsLib, basePath, data.enemies)),
