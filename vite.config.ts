@@ -40,4 +40,6 @@ const libBuild = (): UserConfig => ({
 });
 
 // https://vite.dev/config/
-export default defineConfig(() => viewBuild());
+export default defineConfig(({ mode }) =>
+  mode === "lib" ? libBuild() : viewBuild()
+);
