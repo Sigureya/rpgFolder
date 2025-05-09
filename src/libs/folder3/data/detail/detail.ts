@@ -15,6 +15,13 @@ export const denormalizeIdentifiedItems = <T>(
   return [null, ...items];
 };
 
+export const ensureDataFolderPath = (
+  pathLib: PathLib_Resolve,
+  basePath: string
+): string => {
+  return ensureDataPath(pathLib, basePath, "");
+};
+
 export const ensureDataPath = (
   pathLib: PathLib_Resolve,
   basePath: string,
