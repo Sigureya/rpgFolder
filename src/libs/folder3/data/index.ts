@@ -8,3 +8,5 @@ export * from "./state";
 export * from "./weapon";
 export * from "./troop";
 export * from "./commonEvent";
+export * from "./map";
+export * from "./mapInfo";
