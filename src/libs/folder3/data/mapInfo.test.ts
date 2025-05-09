@@ -6,11 +6,7 @@ import {
 } from "./mapInfo";
 
 import type { Data_MapInfo } from "@sigureya/rpgtypes";
-import {
-  FILENAME_MAP_INFOS,
-  isDataMapInfo,
-  makeMapInfoData,
-} from "@sigureya/rpgtypes";
+import { FILENAME_MAP_INFOS, makeMapInfoData } from "@sigureya/rpgtypes";
 
 const makePathLib = () => {
   return {
