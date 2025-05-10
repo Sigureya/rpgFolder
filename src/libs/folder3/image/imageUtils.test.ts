@@ -2,7 +2,12 @@ import { describe, expect, test, vi } from "vitest";
 import { imageFiles, imageFolderPath } from "./imageUtils";
 import type { Dirent } from "node:fs";
 import { FOLDER_IMG_PICTURES } from "@sigureya/rpgtypes";
-import { makeMockPath } from "src/libs/testUtils";
+
+const makeMockPath = (path: string) => ({
+  sep: "/" as const,
+  resolve: vi.fn(() => path),
+});
+
 describe("imageFolderPath", () => {
   test("returns correct path for valid subfolder", () => {
     const mockPathLib = {
@@ -36,14 +41,14 @@ describe("imageFolderPath", () => {
 });
 
 test("", () => {
-  const mockPathLib = makeMockPath({ resolve: "mockPath" });
+  const mockPathLib = makeMockPath("mockPath");
   expect(mockPathLib.resolve()).toBe("mockPath");
   expect(mockPathLib.resolve()).toBe("mockPath");
 });
 
 describe("imageFiles", () => {
   test("returns only .png files from the directory", async () => {
-    const mockPathLib = makeMockPath({ resolve: "mockPath" });
+    const mockPathLib = makeMockPath("mockPath");
     const mockFsLib = {
       readdir: vi.fn(
         async () =>
@@ -78,7 +83,7 @@ describe("imageFiles", () => {
   });
 
   test("returns empty array if no .png files are found", async () => {
-    const mockPathLib = makeMockPath({ resolve: "mockPath" });
+    const mockPathLib = makeMockPath("mockPath");
     const mockFsLib = {
       readdir: vi.fn(
         async () =>
