@@ -3,6 +3,10 @@ export const isValidAssetPath = (path: string): boolean => {
   if (path === "") {
     return true;
   }
+
+  if (path.endsWith("/")) {
+    return false;
+  }
   if (hasInvalidChars(path)) {
     return false;
   }
