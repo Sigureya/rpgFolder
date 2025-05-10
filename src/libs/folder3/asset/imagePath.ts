@@ -28,7 +28,7 @@ export const buildPicturesPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_PICTURES, filePath);
 };
 
@@ -36,7 +36,7 @@ export const buildBattleback1Path = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(
     pathLib,
     basePath,
@@ -49,7 +49,7 @@ export const buildBattleback2Path = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(
     pathLib,
     basePath,
@@ -62,7 +62,7 @@ export const buildCharactersImagePath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_CHACTERS, filePath);
 };
 
@@ -70,7 +70,7 @@ export const buildEnemyImagesPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_ENEMIES, filePath);
 };
 
@@ -78,7 +78,7 @@ export const buildParallacesPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(
     pathLib,
     basePath,
@@ -91,7 +91,7 @@ export const buildSideViewActorsPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_SV_ACTORS, filePath);
 };
 
@@ -99,7 +99,7 @@ export const buildSideVewEnemiesPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(
     pathLib,
     basePath,
@@ -112,7 +112,7 @@ export const buildSystemImagePath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_SYSTEM, filePath);
 };
 
@@ -120,7 +120,7 @@ export const buildTilesetImagesPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_TILESETS, filePath);
 };
 
@@ -128,7 +128,7 @@ export const buildTitle1ImagesPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_TITLES1, filePath);
 };
 
@@ -136,6 +136,6 @@ export const buildTitle2ImagesPath = (
   pathLib: typeof PathLib,
   basePath: string,
   filePath: string
-) => {
+): string => {
   return buildImageAssetPath(pathLib, basePath, FOLDER_IMG_TITLES2, filePath);
 };
