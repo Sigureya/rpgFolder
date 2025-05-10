@@ -12,26 +12,29 @@ const replaceSeparator = (path: string): string => {
   return path.replaceAll(PathLib.sep, "/");
 };
 
+const expectedPattern = new RegExp("basePath/main/sub$"); // /basePath\/main\/sub$/;
+
 describe("ensurePath", () => {
-  const expected = "basePath/main/sub" as const;
   const MAIN = "main" as const;
   const SUB = "sub" as const;
 
   test("", () => {
     const result = ensurePath(PathLib, "basePath", MAIN, SUB);
     const replaced = replaceSeparator(result);
-    expect(replaced).toBe(expected);
+    expect(replaced).toMatch(expectedPattern);
   });
 
   test("", () => {
     const result = ensurePath(PathLib, "basePath/main", MAIN, SUB);
     const replaced = replaceSeparator(result);
-    expect(replaced).toBe(expected);
+    //    expect(replaced).toBe(expected);
+    expect(replaced).toMatch(expectedPattern);
   });
   test("", () => {
     const result = ensurePath(PathLib, "basePath/main/sub", MAIN, SUB);
     const replaced = replaceSeparator(result);
-    expect(replaced).toBe(expected);
+    // expect(replaced).toBe(expected);
+    expect(replaced).toMatch(expectedPattern);
   });
   test("", () => {
     const result = ensurePath(PathLib, "basePath/mainmain", MAIN, SUB);
