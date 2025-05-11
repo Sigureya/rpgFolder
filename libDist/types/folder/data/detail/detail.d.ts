@@ -1,0 +1,10 @@
+import { IdentifiedItems } from '@sigureya/rpgtypes';
+import { FsLib_WriteFile, FsLib_ReadFile, PathLib_Resolve } from './libTypes';
+export declare const normalizeIdentifiedItems: <T>(items: IdentifiedItems<T>) => T[];
+export declare const denormalizeIdentifiedItems: <T>(items: T[]) => IdentifiedItems<T>;
+export declare const ensureDataFolderPath: (pathLib: PathLib_Resolve, basePath: string) => string;
+export declare const ensureDataPath: (pathLib: PathLib_Resolve, basePath: string, fileName: string) => string;
+export declare const validateAndFilterItems: <T>(list: unknown, fn: (data: unknown) => data is T) => T[];
+export declare const writeDataFile: <T>(fsLib: FsLib_WriteFile, path: string, data: T[], space?: number) => Promise<void>;
+export declare const readDataFile: <T>(fsLib: FsLib_ReadFile, pathLib: PathLib_Resolve, basePath: string, fileName: string, validateFn: (data: unknown) => data is T) => Promise<T[]>;
+export declare const readRmmzDataListFile: <T>(fsLib: FsLib_ReadFile, resolvedPath: string, validateFn: (data: unknown) => data is T) => Promise<T[]>;
