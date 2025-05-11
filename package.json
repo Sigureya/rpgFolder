@@ -3,6 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./libDist/types/index.d.ts",
+      "import": "./libDist/rpgFolder.es.js",
+      "require": "./libDist/rpgFolder.cjs"
+    }
+  },
+  "files": [
+    "libDist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode lib",
