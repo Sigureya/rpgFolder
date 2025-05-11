@@ -41,10 +41,21 @@ const filePathPattern = new RegExp("/img/[a-zA-Z0-9_/]+/[^/]+\\.png$");
 describe("buildBattleback1Path", () => {
   test("should return the correct path", () => {
     const filePath = "cave";
-    const result = buildBattleback1Path(PathLib, BASE_PATH, filePath);
+    const result = buildBattleback1Path(PathLib, "game", filePath);
     expect(replaceSeparator(result)).toMatch(filePathPattern);
     expect(replaceSeparator(result)).toMatch(/cave\.png$/);
-    expect(replaceSeparator(result)).include(`img/${FOLDER_IMG_BATTLEBACK1}/`);
+    expect(replaceSeparator(result)).include(
+      `game/img/${FOLDER_IMG_BATTLEBACK1}/`
+    );
+  });
+  test("", () => {
+    const filePath = "cave";
+    const result = buildBattleback1Path(PathLib, "project", filePath);
+    expect(replaceSeparator(result)).toMatch(filePathPattern);
+    expect(replaceSeparator(result)).toMatch(/cave\.png$/);
+    expect(replaceSeparator(result)).include(
+      `project/img/${FOLDER_IMG_BATTLEBACK1}/`
+    );
   });
 });
 
