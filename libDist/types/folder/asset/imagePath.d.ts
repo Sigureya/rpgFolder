@@ -1,0 +1,14 @@
+import { default as PathLib } from 'node:path';
+export declare const buildFaceImagesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildPicturesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildBattleback1Path: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildBattleback2Path: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildCharactersImagePath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildEnemyImagesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildParallacesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildSideViewActorsPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildSideVewEnemiesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildSystemImagePath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildTilesetImagesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildTitle1ImagesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;
+export declare const buildTitle2ImagesPath: (pathLib: typeof PathLib, basePath: string, filePath: string) => string;

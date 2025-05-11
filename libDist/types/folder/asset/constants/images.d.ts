@@ -1,0 +1,1 @@
+export declare const IMAGE_FOLDERS: readonly ["faces", "pictures", "battlebacks1", "battlebacks2", "characters", "enemies", "parallaxes", "sv_actors", "sv_enemies", "system", "tilesets", "titles1", "titles2"];
