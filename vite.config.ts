@@ -23,7 +23,7 @@ const viewBuild = (): UserConfig => ({
   },
 });
 
-const libName = "rpg-folder" as const;
+const libName = "rpgFolder" as const;
 const libBuild = (): UserConfig => ({
   build: {
     outDir: "libDist",
@@ -48,11 +48,10 @@ const libBuild = (): UserConfig => ({
   },
   plugins: [
     dts({
+      entryRoot: "src/libs",
       tsconfigPath: "./src/libs/tsconfig.json",
       outDir: "libDist/types",
       exclude: ["./**/*.test.ts"],
-      //insertTypesEntry: true, // package.json に "types" フィールドを自動追加
-      //  rollupTypes: true, // ロールアップされた型情報を生成
     }),
   ],
 });
