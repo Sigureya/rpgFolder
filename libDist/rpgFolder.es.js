@@ -322,4 +322,4 @@ export {
   ln as writeRmmzTroopData,
   jt as writeRmmzWeaponData
 };
-//# sourceMappingURL=rpg-folder.es.js.map
+//# sourceMappingURL=rpgFolder.es.js.map
