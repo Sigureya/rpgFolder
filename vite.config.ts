@@ -23,7 +23,7 @@ const viewBuild = (): UserConfig => ({
   },
 });
 
-const libName = "rpg-folder" as const;
+const libName = "rpgFolder" as const;
 const libBuild = (): UserConfig => ({
   build: {
     outDir: "libDist",
