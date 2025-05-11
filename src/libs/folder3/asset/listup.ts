@@ -24,18 +24,20 @@ const areExtention = <D extends { name: string }, Ext extends `.${string}`>(
   return dirent.name.endsWith(ext);
 };
 
+export const isAudioFileExtension = <D extends { name: string }>(dirent: D) => {
+  return areExtention(dirent, ".ogg") || areExtention(dirent, ".m4a");
+};
+
+export const isImageFileExtension = <D extends { name: string }>(dirent: D) => {
+  return areExtention(dirent, ".png");
+};
+
 export const isImageDirent = (dirent: Dirent): dirent is ImageDirent => {
-  if (dirent.isFile()) {
-    return areExtention(dirent, ".png");
-  }
-  return false;
+  return dirent.isFile() && isImageFileExtension(dirent);
 };
 
 export const isAudioDirent = (dirent: Dirent): dirent is AudioDirent => {
-  if (dirent.isFile()) {
-    return areExtention(dirent, ".ogg") || areExtention(dirent, ".mp3");
-  }
-  return false;
+  return dirent.isFile() && isAudioFileExtension(dirent);
 };
 
 export const listupAudioFiles = async (
