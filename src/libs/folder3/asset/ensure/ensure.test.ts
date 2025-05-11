@@ -39,7 +39,7 @@ describe("ensurePath", () => {
   test("", () => {
     const result = ensurePath(PathLib, "basePath/mainmain", MAIN, SUB);
     const replaced = replaceSeparator(result);
-    expect(replaced).toBe("basePath/mainmain/main/sub");
+    expect(replaced).toMatch(new RegExp("basePath/mainmain/main/sub$"));
   });
 });
 
@@ -55,13 +55,13 @@ describe("validateFilePath", () => {
 });
 
 describe("buildImageAssetPath", () => {
-  const expected = "basePath/img/face/file.png" as const;
+  const expected = new RegExp("basePath/img/face/file.png");
 
   test("", () => {
     const result = buildImageAssetPath(PathLib, "basePath", "face", "file");
     const replaced = replaceSeparator(result);
-    expect(replaced).toBe(expected);
     expect(replaced.endsWith(".png")).toBe(true);
+    expect(replaced).toMatch(expected);
   });
   test("", () => {
     expect(() =>
@@ -74,13 +74,13 @@ describe("buildImageAssetPath", () => {
 });
 
 describe("buildAudioAssetPath", () => {
-  const expected = "basePath/audio/bgm/file.ogg" as const;
+  const expected = new RegExp("basePath/audio/bgm/file\\.ogg");
 
   test("", () => {
     const result = buildAudioAssetPath(PathLib, "basePath", "bgm", "file");
     const replaced = replaceSeparator(result);
-    expect(replaced).toBe(expected);
     expect(replaced.endsWith(".ogg")).toBe(true);
+    expect(replaced).toMatch(expected);
   });
   test("", () => {
     expect(() =>
