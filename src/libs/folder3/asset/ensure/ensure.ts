@@ -12,7 +12,7 @@ export const ensurePath = (
 
   if (normalizedBasePath.endsWith(`${pathLib.sep}${folderName}`)) {
     // フォルダ名がbasePathに含まれている場合、basePathをそのまま使用
-    return pathLib.join(normalizedBasePath, subFolderName);
+    return pathLib.resolve(normalizedBasePath, subFolderName);
   }
 
   if (
@@ -24,7 +24,7 @@ export const ensurePath = (
   }
 
   // サブフォルダを結合
-  return pathLib.join(basePath, folderName, subFolderName);
+  return pathLib.resolve(basePath, folderName, subFolderName);
 };
 
 export const validateFilePath = (filePath: string): boolean => {
