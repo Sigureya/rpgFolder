@@ -1,4 +1,4 @@
 export * from "./data/features";
-export * from "./dataDispatch";
+export * from "./data/multiRead";
 export * from "./multiWrite";
 export * from "./asset";

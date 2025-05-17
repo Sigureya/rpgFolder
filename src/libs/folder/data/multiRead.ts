@@ -1,6 +1,6 @@
 import type PathLib from "node:path";
 import type FsLib from "node:fs/promises";
-import type { DataMapper } from "./data/features/types";
+import type { DataMapper } from "./features/types";
 import {
   SRC_DATA_ACTOR,
   SRC_DATA_ARMOR,
@@ -24,7 +24,7 @@ import {
   readRmmzStateData,
   readRmmzTroopData,
   readRmmzWeaponData,
-} from "./data/features";
+} from "./features";
 type FsLib_ReadFile = Pick<typeof FsLib, "readFile">;
 type PathLib_Resolve = Pick<typeof PathLib, "resolve" | "sep">;
 
