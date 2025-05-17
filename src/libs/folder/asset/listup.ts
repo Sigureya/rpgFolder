@@ -1,10 +1,10 @@
 import type { Dirent } from "node:fs";
-import type { FsLib_ReadDir } from "../data/detail/libTypes";
 import type PathLib from "node:path";
 import { ensurePath } from "./ensure";
 import type { AudioFolders, ImageFolders } from "@sigureya/rpgtypes";
 import { FOLDER_IMG, FOLDER_AUDIO } from "@sigureya/rpgtypes";
 import type { AudioDirent, ImageDirent } from "./types/assetPath";
+import type { FsLib_ReadDir } from "folder/data/features/detail/libTypes";
 
 export const listupImageFiles = async (
   pathLib: typeof PathLib,

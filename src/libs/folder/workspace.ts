@@ -1,5 +1,8 @@
-import { ensureDataFolderPath } from "./data/detail";
-import type { PathLib_Resolve, FsLib_WriteFile } from "./data/detail/libTypes";
+import { ensureDataFolderPath } from "./data/features/detail";
+import type {
+  PathLib_Resolve,
+  FsLib_WriteFile,
+} from "./data/features/detail/libTypes";
 
 export const makeDataFiels = (
   pathLib: PathLib_Resolve,
