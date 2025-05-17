@@ -28,7 +28,7 @@ import {
   makeStateData,
   makeWeaponData,
 } from "@sigureya/rpgtypes";
-import { readDataFile } from "./data/detail/detail";
+import { readDataFile } from "./data/features/detail";
 
 const makeMockFs = (func: (filepath: string) => Promise<string>) => {
   return {

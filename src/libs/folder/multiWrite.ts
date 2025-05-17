@@ -7,9 +7,9 @@ import {
   writeRmmzItemData,
   writeRmmzSkillData,
   writeRmmzStateData,
-} from "./data";
+} from "./data/features";
 import type { FsLib_WriteFile, PathLib_Resolve } from "./data/detail/libTypes";
-import type { DataTable } from "./data/types";
+import type { DataTable } from "./data/features/types";
 
 const ggg = (fm: () => Promise<void>) => {
   try {
