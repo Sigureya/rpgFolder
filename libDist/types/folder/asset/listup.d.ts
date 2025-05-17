@@ -1,8 +1,8 @@
 import { Dirent } from 'node:fs';
-import { FsLib_ReadDir } from '../data/detail/libTypes';
 import { default as PathLib } from 'node:path';
 import { AudioFolders, ImageFolders } from '@sigureya/rpgtypes';
 import { AudioDirent, ImageDirent } from './types/assetPath';
+import { FsLib_ReadDir } from 'folder/data/features/detail/libTypes';
 export declare const listupImageFiles: (pathLib: typeof PathLib, fsLib: FsLib_ReadDir, basePath: string, subFolderName: ImageFolders) => Promise<ImageDirent[]>;
 export declare const isAudioFileExtension: <D extends {
     name: string;
