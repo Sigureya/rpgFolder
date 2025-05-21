@@ -2,7 +2,9 @@
   "name": "@sigureya/rpgfolder",
   "private": true,
   "version": "0.0.0",
-  "main": "./libDist/types/folder",
+  "main": "./libDist/rpgFolder.cjs",
+  "types": "./libDist/types/index.d.ts",
+  "module": "./libDist/rpgFolder.es.js",
   "exports": {
     ".": {
       "types": "./libDist/types/index.d.ts",
