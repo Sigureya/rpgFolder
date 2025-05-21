@@ -34,7 +34,6 @@ const libBuild = (): UserConfig => ({
       entry: "src/libs/index.ts",
       name: libName,
       fileName: (format) => `${libName}.${format}.js`,
-      formats: ["es", "cjs"],
     },
     sourcemap: true,
     rollupOptions: {
