@@ -27,7 +27,7 @@ const viewBuild = (): UserConfig => ({
 const libName = "rpgFolder" as const;
 const libBuild = (): UserConfig => ({
   build: {
-    outDir: "libDist",
+    outDir: "dist",
     minify: false,
 
     lib: {
@@ -63,7 +63,7 @@ const libBuild = (): UserConfig => ({
     dts({
       entryRoot: "src/libs",
       tsconfigPath: "./src/libs/tsconfig.json",
-      outDir: "libDist/types",
+      outDir: "dist/types",
       exclude: ["./**/*.test.ts"],
     }),
   ],
