@@ -1,4 +1,5 @@
-import { defineConfig, UserConfig } from "vite";
+import type { UserConfig } from "vite";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import dts from "vite-plugin-dts";
@@ -26,18 +27,30 @@ const viewBuild = (): UserConfig => ({
 const libName = "rpgFolder" as const;
 const libBuild = (): UserConfig => ({
   build: {
-    outDir: "libDist",
+    outDir: "dist",
+    minify: false,
 
     lib: {
       entry: "src/libs/index.ts",
       name: libName,
       fileName: (format) => `${libName}.${format}.js`,
-      formats: ["es", "cjs"],
     },
     sourcemap: true,
     rollupOptions: {
       external: (id) =>
         id.endsWith(".test.ts") || ["@sigureya/rpgtypes"].includes(id),
+      output: [
+        {
+          format: "es",
+          entryFileNames: `${libName}.es.js`,
+          exports: "named",
+        },
+        {
+          format: "cjs",
+          entryFileNames: `${libName}.cjs`,
+          exports: "named",
+        },
+      ],
     },
   },
   resolve: {
@@ -50,7 +63,7 @@ const libBuild = (): UserConfig => ({
     dts({
       entryRoot: "src/libs",
       tsconfigPath: "./src/libs/tsconfig.json",
-      outDir: "libDist/types",
+      outDir: "dist/types",
       exclude: ["./**/*.test.ts"],
     }),
   ],

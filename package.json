@@ -2,18 +2,18 @@
   "name": "@sigureya/rpgfolder",
   "private": true,
   "version": "0.0.0",
-  "main": "./libDist/rpgFolder.cjs",
-  "types": "./libDist/types/index.d.ts",
-  "module": "./libDist/rpgFolder.es.js",
+  "main": "./dist/rpgFolder.cjs",
+  "types": "./dist/types/index.d.ts",
+  "module": "./dist/rpgFolder.es.js",
   "exports": {
     ".": {
-      "types": "./libDist/types/index.d.ts",
-      "import": "./libDist/rpgFolder.es.js",
-      "require": "./libDist/rpgFolder.cjs"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/rpgFolder.es.js",
+      "require": "./dist/rpgFolder.cjs"
     }
   },
   "files": [
-    "libDist"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
