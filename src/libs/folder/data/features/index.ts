@@ -10,3 +10,4 @@ export * from "./troop";
 export * from "./commonEvent";
 export * from "./map";
 export * from "./mapInfo";
+export * from "./system";
