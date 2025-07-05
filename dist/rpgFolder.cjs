@@ -384,7 +384,7 @@ const buildTitle1ImagesPath = (pathLib, basePath, filePath) => {
 const buildTitle2ImagesPath = (pathLib, basePath, filePath) => {
   return buildImageAssetPath(pathLib, basePath, rpgtypes.FOLDER_IMG_TITLES2, filePath);
 };
-const AUDIO_FOLDES = [
+const AUDIO_FOLDERS = [
   rpgtypes.FOLDER_AUDIO_BGM,
   rpgtypes.FOLDER_AUDIO_BGS,
   rpgtypes.FOLDER_AUDIO_ME,
@@ -417,7 +417,7 @@ const makeImageFolders = (pathLib, fsLib, basePath) => {
   });
 };
 const makeAudioFolders = (pathLib, fsLib, basePath) => {
-  return AUDIO_FOLDES.map((folder) => {
+  return AUDIO_FOLDERS.map((folder) => {
     return makeFolder(pathLib, fsLib, basePath, rpgtypes.FOLDER_IMG, folder);
   });
 };
@@ -497,6 +497,17 @@ const listupAudioFiles = async (pathLib, fsLib, basePath, subFolderName) => {
   const dirents = await fsLib.readdir(dirPath, { withFileTypes: true });
   return dirents.filter(isAudioDirent);
 };
+const imageFolders = (pathLib, basePath) => {
+  return IMAGE_FOLDERS.map(
+    (folder) => ensurePath(pathLib, basePath, rpgtypes.FOLDER_IMG, folder)
+  );
+};
+const audioFolders = (pathLib, basePath) => {
+  return AUDIO_FOLDERS.map(
+    (folder) => ensurePath(pathLib, basePath, rpgtypes.FOLDER_AUDIO, folder)
+  );
+};
+exports.audioFolders = audioFolders;
 exports.buildBattleback1Path = buildBattleback1Path;
 exports.buildBattleback2Path = buildBattleback2Path;
 exports.buildBgmPath = buildBgmPath;
@@ -527,6 +538,7 @@ exports.ensureStateDataPath = ensureStateDataPath;
 exports.ensureSystemDataPath = ensureSystemDataPath;
 exports.ensureTroopDataPath = ensureTroopDataPath;
 exports.ensureWeaponDataPath = ensureWeaponDataPath;
+exports.imageFolders = imageFolders;
 exports.isAudioDirent = isAudioDirent;
 exports.isAudioFileExtension = isAudioFileExtension;
 exports.isImageDirent = isImageDirent;
