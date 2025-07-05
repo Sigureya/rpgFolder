@@ -1,28 +1,7 @@
 import type { UserConfig } from "vite";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import path from "path";
 import dts from "vite-plugin-dts";
-
-import { middleware } from "./src/examples/server/devServer";
-
-const viewBuild = (): UserConfig => ({
-  plugins: [
-    react(),
-    {
-      name: "api",
-      configureServer: (server) => {
-        server.middlewares.use(middleware);
-      },
-    },
-  ],
-  resolve: {
-    alias: {
-      "@lib/nodeLib": path.resolve(__dirname, "src/libs/nodeLib"),
-      "@constants": path.resolve(__dirname, "src/libs/constants"),
-    },
-  },
-});
 
 const libName = "rpgFolder" as const;
 const libBuild = (): UserConfig => ({
@@ -71,5 +50,5 @@ const libBuild = (): UserConfig => ({
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  return mode === "lib" ? libBuild() : viewBuild();
+  return libBuild();
 });

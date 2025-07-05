@@ -1,6 +1,6 @@
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
-// import fn from "eslint-plugin-functional";
+import fn from "eslint-plugin-functional";
 // import globals from "globals";
 // import reactHooks from "eslint-plugin-react-hooks";
 // import reactRefresh from "eslint-plugin-react-refresh";
@@ -9,7 +9,7 @@ import tsParser from "@typescript-eslint/parser";
 export default [
   {
     ignores: ["dist", "**/*.d.ts"],
-    files: ["src/**/*.ts", "vite.config.mts"],
+    files: ["src/**/*.ts"],
 
     languageOptions: {
       //      ecmaVersion: 2020,
@@ -18,12 +18,12 @@ export default [
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        // project: "./tsconfig.json", // 型情報を提供するためにプロジェクトを指定
+        project: "./tsconfig.json", // 型情報を提供するためにプロジェクトを指定
       },
     },
     plugins: {
       "@typescript-eslint": tseslint,
-      //    "@functional": fn,
+      "@functional": fn,
       // "react-hooks": reactHooks,
       // "react-refresh": reactRefresh,
     },
@@ -35,8 +35,8 @@ export default [
       curly: "error",
 
       // 純粋関数強制Rule
-      //      "@functional/no-return-void": "warn",
-      //      "@functional/no-let": "error",
+      "@functional/no-return-void": "warn",
+      "@functional/no-let": "error",
       //
       // その他のルール
       "@typescript-eslint/explicit-function-return-type": "off",
@@ -53,6 +53,16 @@ export default [
       //   "warn",
       //   { allowConstantExport: true },
       // ],
+    },
+  },
+  {
+    files: ["src/**/*.test.ts"],
+
+    rules: {
+      // テストファイルに特有のルール
+      "@typescript-eslint/no-explicit-any": "off", // テストではanyを許可
+      "@functional/no-return-void": "off",
+      "no-restricted-imports": "off",
     },
   },
 ];
