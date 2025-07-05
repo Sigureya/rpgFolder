@@ -1,1 +1,1 @@
-export declare const AUDIO_FOLDES: readonly ["bgm", "bgs", "me", "se"];
+export declare const AUDIO_FOLDERS: readonly ["bgm", "bgs", "me", "se"];

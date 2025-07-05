@@ -5,7 +5,7 @@ import {
   FOLDER_AUDIO_SE,
 } from "@sigureya/rpgtypes";
 
-export const AUDIO_FOLDES = [
+export const AUDIO_FOLDERS = [
   FOLDER_AUDIO_BGM,
   FOLDER_AUDIO_BGS,
   FOLDER_AUDIO_ME,

@@ -2,7 +2,7 @@ import type PathLib from "node:path";
 import type FsLib from "node:fs/promises";
 import { ensurePath } from "./ensure";
 import { FOLDER_DATA, FOLDER_IMG } from "@sigureya/rpgtypes";
-import { AUDIO_FOLDES, IMAGE_FOLDERS } from "./constants";
+import { AUDIO_FOLDERS, IMAGE_FOLDERS } from "./constants";
 
 const makeFolder = (
   pathLib: typeof PathLib,
@@ -32,7 +32,7 @@ export const makeAudioFolders = (
   fsLib: typeof FsLib,
   basePath: string
 ): Promise<string | undefined>[] => {
-  return AUDIO_FOLDES.map((folder) => {
+  return AUDIO_FOLDERS.map((folder) => {
     return makeFolder(pathLib, fsLib, basePath, FOLDER_IMG, folder);
   });
 };
