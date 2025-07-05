@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "main": "./dist/rpgFolder.cjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/folder/index.d.ts",
   "module": "./dist/rpgFolder.es.js",
   "exports": {
     ".": {
