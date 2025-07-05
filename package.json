@@ -7,7 +7,7 @@
   "module": "./dist/rpgFolder.es.js",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
+      "types": "./dist/types/folder/index.d.ts",
       "import": "./dist/rpgFolder.es.js",
       "require": "./dist/rpgFolder.cjs"
     }
