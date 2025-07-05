@@ -42,7 +42,7 @@ const libBuild = (): UserConfig => ({
     dts({
       entryRoot: "src/libs",
       tsconfigPath: "./src/libs/tsconfig.json",
-      outDir: "dist/types",
+      outDir: "dist",
       exclude: ["./**/*.test.ts"],
     }),
   ],
