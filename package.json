@@ -25,6 +25,7 @@
     "@sigureya/rpgtypes": "github:Sigureya/RpgTypes"
   },
   "devDependencies": {
+    "eslint-plugin-functional": "^9.0.2",
     "@eslint/js": "^9.22.0",
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
