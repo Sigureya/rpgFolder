@@ -165,6 +165,11 @@ const resolveMapFilePath = (pathLib, basePath, mapId) => {
   const filePath = pathLib.resolve(basePath, fileName);
   return { filePath, fileName };
 };
+const ensureMapFilePath = (pathLib, basePath, mapId) => {
+  const fileName = makeMapFileName(mapId);
+  const filePath = ensureDataPath(pathLib, basePath, fileName);
+  return { filePath, fileName };
+};
 const validateAndNormalizeMapData = (data) => {
   return rpgtypes.makeMapData(data);
 };
@@ -532,6 +537,7 @@ exports.ensureClassDataPath = ensureClassDataPath;
 exports.ensureCommonEventDataPath = ensureCommonEventDataPath;
 exports.ensureEnemyDataPath = ensureEnemyDataPath;
 exports.ensureItemDataPath = ensureItemDataPath;
+exports.ensureMapFilePath = ensureMapFilePath;
 exports.ensureMapInfoDataPath = ensureMapInfoDataPath;
 exports.ensureSkillDataPath = ensureSkillDataPath;
 exports.ensureStateDataPath = ensureStateDataPath;
