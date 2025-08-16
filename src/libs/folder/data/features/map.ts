@@ -8,6 +8,7 @@ import type { FsLib_ReadFile, PathLib_Resolve } from "./detail/libTypes";
 import type FsLib from "node:fs/promises";
 import type { Dirent } from "node:fs";
 import { readRmmzMapInfoData } from "./mapInfo";
+import { ensureDataPath } from "./detail";
 type InfoType = Pick<Data_MapInfo, "name" | "id">;
 
 export const isMapFileName = (filename: string) => {
@@ -27,6 +28,10 @@ const makeMapFileName = (mapId: number) => {
   return `Map${String(mapId).padStart(3, "0")}.json` as const;
 };
 
+/**
+ * @deprecated
+ * @returns
+ */
 export const resolveMapFilePath = (
   pathLib: PathLib_Resolve,
   basePath: string,
@@ -34,6 +39,16 @@ export const resolveMapFilePath = (
 ) => {
   const fileName = makeMapFileName(mapId);
   const filePath = pathLib.resolve(basePath, fileName);
+  return { filePath, fileName };
+};
+
+export const ensureMapFilePath = (
+  pathLib: PathLib_Resolve,
+  basePath: string,
+  mapId: number
+) => {
+  const fileName = makeMapFileName(mapId);
+  const filePath = ensureDataPath(pathLib, basePath, fileName);
   return { filePath, fileName };
 };
 

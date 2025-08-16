@@ -5,7 +5,15 @@ import { Dirent } from 'node:fs';
 type InfoType = Pick<Data_MapInfo, "name" | "id">;
 export declare const isMapFileName: (filename: string) => boolean;
 export declare const listupMapFiles: (fsLib: Pick<typeof FsLib, "readdir">, resolvedPath: string) => Promise<Dirent[]>;
+/**
+ * @deprecated
+ * @returns
+ */
 export declare const resolveMapFilePath: (pathLib: PathLib_Resolve, basePath: string, mapId: number) => {
+    filePath: string;
+    fileName: `Map${string}.json`;
+};
+export declare const ensureMapFilePath: (pathLib: PathLib_Resolve, basePath: string, mapId: number) => {
     filePath: string;
     fileName: `Map${string}.json`;
 };

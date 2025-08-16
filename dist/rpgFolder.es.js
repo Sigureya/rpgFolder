@@ -163,6 +163,11 @@ const resolveMapFilePath = (pathLib, basePath, mapId) => {
   const filePath = pathLib.resolve(basePath, fileName);
   return { filePath, fileName };
 };
+const ensureMapFilePath = (pathLib, basePath, mapId) => {
+  const fileName = makeMapFileName(mapId);
+  const filePath = ensureDataPath(pathLib, basePath, fileName);
+  return { filePath, fileName };
+};
 const validateAndNormalizeMapData = (data) => {
   return makeMapData(data);
 };
@@ -531,6 +536,7 @@ export {
   ensureCommonEventDataPath,
   ensureEnemyDataPath,
   ensureItemDataPath,
+  ensureMapFilePath,
   ensureMapInfoDataPath,
   ensureSkillDataPath,
   ensureStateDataPath,
